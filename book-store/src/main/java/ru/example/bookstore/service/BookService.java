@@ -24,11 +24,16 @@ public class BookService {
     }
 
     public List<Book> getBooks() {
-        Integer discount = discountService.getDiscount();
-
         return bookRepository.findAll().stream().peek(book -> book.setPrice(book.getPrice().subtract(
-                book.getPrice().multiply(new BigDecimal(discount)).divide(new BigDecimal(100),
-                       RoundingMode.DOWN))))
+                book.getPrice().multiply(new BigDecimal(discountService.getDiscountByGenre(book.getGenre())))
+                .divide(new BigDecimal(100), RoundingMode.DOWN))))
                 .collect(Collectors.toList());
+    }
+
+    public List<Book> getBookById(Long id) {
+        return bookRepository.findById(id).stream().peek(book -> book.setPrice(book.getPrice().subtract(
+            book.getPrice().multiply(new BigDecimal(discountService.getDiscountByGenre(book.getGenre())))
+            .divide(new BigDecimal(100), RoundingMode.DOWN))))
+            .collect(Collectors.toList());
     }
 }

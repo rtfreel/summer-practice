@@ -1,8 +1,7 @@
-package ru.example.bookstore.entity;
+package ru.example.bookdiscount.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import java.math.BigDecimal;
 
 @Builder
@@ -18,12 +16,9 @@ import java.math.BigDecimal;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Book {
+public class Discount {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String author;
-    private String title;
     private String genre;
-    private BigDecimal price;
+    private Integer percent;
 }

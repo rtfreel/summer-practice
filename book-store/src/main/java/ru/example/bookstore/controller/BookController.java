@@ -26,8 +26,8 @@ public class BookController {
     }
 
     @GetMapping("/book/{id}")
-    public String getBookById(@PathVariable Long id) {
+    public List<Book> getBookById(@PathVariable Long id) {
         log.info("User requested book with id: {} ", id);
-        return "Book1";
+        return bookService.getBookById(id);
     }
 }
